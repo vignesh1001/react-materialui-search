@@ -12,6 +12,25 @@ import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import { DesktopMacIcon } from '@material-ui/icons';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+
+function createData(deviceName,description) {
+  return { deviceName,description };
+}
+
+const rows = [
+  createData('Device 1','Test 1222423442342'),
+  createData('Mobile 1','Test 55656565'),
+  createData('iPhone 1','Test 957545'),
+  createData('Android 1','Test 8888888'),
+  createData('Device 1','Test 1111111111'),
+];
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -108,10 +127,41 @@ function ListPage() {
                   </FormControl>
                 </ListItem>
               </List>
+              <ListItem divider className={classes.filterHeader}>
+                <ListItemText primary="Software" />
+              </ListItem>
+              <ListItem divider className={classes.filterHeader}>
+                <ListItemText primary="Hardware" />
+              </ListItem>
             </form>
           </Grid>
           <Grid item xs={6} style={{ height: "100vh" }}>
-            sdsdsd
+            <TableContainer component={Paper}>
+      <Table className={classes.table} size="small" aria-label="a dense table">
+        <TableHead>
+          <TableRow>
+            <TableCell></TableCell>
+            <TableCell align="right"></TableCell>
+            <TableCell align="right"></TableCell>
+            <TableCell align="right"></TableCell>
+            <TableCell align="right"></TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {rows.map((row) => (
+            <TableRow key={row.name}>
+              <TableCell component="th" scope="row">
+                {row.name}
+              </TableCell>
+              <TableCell align="right">{row.deviceName}</TableCell>
+              <TableCell align="right"></TableCell>
+              <TableCell align="right">{row.description}</TableCell>
+              <TableCell align="right"></TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
           </Grid>
         </Grid>
       </Container>
